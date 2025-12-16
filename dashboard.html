@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: white;
+            color: black;
+            padding: 20px;
+            /* E-ink typical resolution - adjust based on your display */
+            width: 800px;
+            height: 480px;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid black;
+            padding-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .header .date {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .card {
+            border: 2px solid black;
+            padding: 15px;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            border-bottom: 2px solid black;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            font-weight: normal;
+        }
+
+        .stat-value {
+            font-weight: bold;
+        }
+
+        .recent-runs {
+            grid-column: 1 / -1;
+        }
+
+        .run-item {
+            padding: 8px 0;
+            border-bottom: 1px solid black;
+            font-size: 13px;
+        }
+
+        .run-item:last-child {
+            border-bottom: none;
+        }
+
+        .run-item .run-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .run-date {
+            font-weight: bold;
+        }
+
+        .run-stats {
+            color: #333;
+        }
+
+        .events {
+            grid-column: 1 / -1;
+        }
+
+        .event-item {
+            padding: 6px 0;
+            font-size: 13px;
+            border-bottom: 1px dotted black;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Running Dashboard</h1>
+            <div class="date" id="currentDate"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>This Week</h2>
+                <div class="stat-row">
+                    <span class="stat-label">Distance:</span>
+                    <span class="stat-value" id="weekDistance">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Runs:</span>
+                    <span class="stat-value" id="weekRuns">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="weekTime">--</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>This Month</h2>
+                <div class="stat-row">
+                    <span class="stat-label">Distance:</span>
+                    <span class="stat-value" id="monthDistance">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Runs:</span>
+                    <span class="stat-value" id="monthRuns">--</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Avg Pace:</span>
+                    <span class="stat-value" id="monthPace">--</span>
+                </div>
+            </div>
+
+            <div class="card recent-runs">
+                <h2>Recent Runs</h2>
+                <div id="recentRunsList"></div>
+            </div>
+
+            <div class="card events">
+                <h2>Upcoming Events</h2>
+                <div id="eventsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+
+                // Set current date
+                document.getElementById('currentDate').textContent = data.lastUpdated;
+
+                // Set weekly stats
+                document.getElementById('weekDistance').textContent = data.thisWeek.distance;
+                document.getElementById('weekRuns').textContent = data.thisWeek.runs;
+                document.getElementById('weekTime').textContent = data.thisWeek.time;
+
+                // Set monthly stats
+                document.getElementById('monthDistance').textContent = data.thisMonth.distance;
+                document.getElementById('monthRuns').textContent = data.thisMonth.runs;
+                document.getElementById('monthPace').textContent = data.thisMonth.avgPace;
+
+                // Render recent runs
+                const runsHTML = data.recentRuns.map(run => `
+                    <div class="run-item">
+                        <div class="run-header">
+                            <span class="run-date">${run.date}</span>
+                            <span>${run.distance}</span>
+                        </div>
+                        <div class="run-stats">${run.pace} • ${run.time}</div>
+                    </div>
+                `).join('');
+                document.getElementById('recentRunsList').innerHTML = runsHTML;
+
+                // Render upcoming events
+                const eventsHTML = data.upcomingEvents.map(event => `
+                    <div class="event-item">
+                        <strong>${event.date}</strong> - ${event.title}
+                    </div>
+                `).join('');
+                document.getElementById('eventsList').innerHTML = eventsHTML;
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

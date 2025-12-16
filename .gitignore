@@ -1,0 +1,6 @@
+node_modules/
+dashboard.png
+*.log
+.DS_Store
+.env
+tokens.json

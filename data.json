@@ -1,0 +1,63 @@
+{
+  "lastUpdated": "Monday, December 16, 2024 - 6:00 AM",
+  "thisWeek": {
+    "distance": "42.7 km",
+    "runs": "5",
+    "time": "4h 02m"
+  },
+  "thisMonth": {
+    "distance": "178.3 km",
+    "runs": "22",
+    "avgPace": "4:58 /km"
+  },
+  "recentRuns": [
+    {
+      "date": "Dec 15",
+      "distance": "15.2 km",
+      "pace": "4:52 /km",
+      "time": "1:14:02"
+    },
+    {
+      "date": "Dec 14",
+      "distance": "6.8 km",
+      "pace": "5:15 /km",
+      "time": "35:42"
+    },
+    {
+      "date": "Dec 12",
+      "distance": "10.5 km",
+      "pace": "4:45 /km",
+      "time": "49:52"
+    },
+    {
+      "date": "Dec 10",
+      "distance": "8.2 km",
+      "pace": "5:02 /km",
+      "time": "41:18"
+    },
+    {
+      "date": "Dec 8",
+      "distance": "21.1 km",
+      "pace": "5:10 /km",
+      "time": "1:49:01"
+    }
+  ],
+  "upcomingEvents": [
+    {
+      "date": "Dec 17",
+      "title": "Track Intervals - 6:30 AM"
+    },
+    {
+      "date": "Dec 19",
+      "title": "Easy Recovery Run - 7:00 AM"
+    },
+    {
+      "date": "Dec 22",
+      "title": "Half Marathon Long Run - 7:00 AM"
+    },
+    {
+      "date": "Dec 25",
+      "title": "Christmas Day Parkrun 5K - 9:00 AM"
+    }
+  ]
+}

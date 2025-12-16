@@ -1,0 +1,21 @@
+{
+  "name": "running-dashboard",
+  "version": "1.0.0",
+  "description": "E-ink running dashboard with Strava and Google Calendar data",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js",
+    "serve": "npx http-server -p 8080"
+  },
+  "keywords": [
+    "running",
+    "dashboard",
+    "e-ink",
+    "strava"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^24.15.0"
+  }
+}
