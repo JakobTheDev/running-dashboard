@@ -140,5 +140,6 @@ vite.config.ts.timestamp-*
 
 # Project specific
 dashboard.png
+dashboard.bmp
 tokens.json
 .DS_Store
