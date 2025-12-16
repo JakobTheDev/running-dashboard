@@ -14,7 +14,7 @@ from PIL import Image
 # Example: from waveshare_epd import epd7in5_V2
 try:
     from waveshare_epd import epd7in3e as epd
-    DISPLAY_MODEL = "7.3inch E-ink"
+    DISPLAY_MODEL = "7.3inch E-Ink Display"
 except ImportError:
     print("Error: waveshare_epd library not found")
     print("Install with: pip install waveshare-epd")
