@@ -33,7 +33,7 @@ This will create `dashboard.png` in the project directory.
 pip3 install -r requirements.txt
 ```
 
-2. Configure your display model in `display.py`:
+2. Configure your display model in `src/scripts/display.py`:
 ```python
 # Change this line to match your Waveshare display model
 from waveshare_epd import epd7in5_V2 as epd
@@ -46,7 +46,7 @@ Common display models:
 
 3. Display the dashboard on e-ink (requires sudo on Raspberry Pi):
 ```bash
-sudo python3 display.py
+sudo python3 src/scripts/display.py
 ```
 
 ## Complete Workflow
@@ -64,17 +64,25 @@ scp dashboard.png pi@raspberrypi:/home/pi/running-dashboard/
 
 # Display on e-ink
 cd /home/pi/running-dashboard/
-sudo python3 display.py
+sudo python3 src/scripts/display.py
 ```
 
 ## Project Structure
 
-- `dashboard.html` - Main HTML dashboard
-- `data.json` - Running statistics data
-- `generate.js` - Script to generate PNG from HTML
-- `display.py` - Python script to render to Waveshare e-ink display
-- `requirements.txt` - Python dependencies
-- `PLAN.md` - Full implementation plan
+```
+├── src/
+│   ├── web/              # Web dashboard files
+│   │   ├── dashboard.html
+│   │   └── data.json
+│   └── scripts/          # Automation scripts
+│       ├── display.py
+│       ├── update_display.sh
+│       └── setup_pi.sh
+├── generate.js           # PNG generation script
+├── package.json          # Node.js dependencies
+├── requirements.txt      # Python dependencies
+└── PLAN.md               # Full implementation plan
+```
 
 ## Raspberry Pi Setup Notes
 
@@ -100,6 +108,6 @@ See `PLAN.md` for the full implementation plan including:
 ## Customization
 
 - Adjust display dimensions in `generate.js` (CONFIG object)
-- Modify dashboard layout in `dashboard.html`
-- Update mock data in `data.json`
-- Configure display model in `display.py`
+- Modify dashboard layout in `src/web/dashboard.html`
+- Update mock data in `src/web/data.json`
+- Configure display model in `src/scripts/display.py`

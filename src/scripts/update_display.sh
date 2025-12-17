@@ -3,6 +3,12 @@
 
 set -e  # Exit on error
 
+# Get the script directory and project root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
+cd "$PROJECT_ROOT"
+
 echo "================================"
 echo "Running Dashboard Update"
 echo "================================"
@@ -16,11 +22,11 @@ npm run generate
 if command -v raspi-config &> /dev/null; then
     echo ""
     echo "[2/2] Displaying on e-ink..."
-    sudo python3 display.py
+    sudo python3 src/scripts/display.py
 else
     echo ""
     echo "[2/2] Skipping display - not on Raspberry Pi"
-    echo "Transfer dashboard.png to your Pi and run: sudo python3 display.py"
+    echo "Transfer dashboard.png to your Pi and run: sudo python3 src/scripts/display.py"
 fi
 
 echo ""

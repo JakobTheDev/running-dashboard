@@ -8,15 +8,19 @@ const CONFIG = {
   // E-ink display dimensions - adjust for your specific display
   width: 800,
   height: 480,
+  webDir: path.join(__dirname, 'src', 'web'),
   outputPath: path.join(__dirname, 'dashboard.png'),
-  htmlPath: path.join(__dirname, 'dashboard.html'),
+  htmlPath: path.join(__dirname, 'src', 'web', 'dashboard.html'),
   port: 8765
 };
 
 // Simple HTTP server to serve local files
 function startServer() {
   const server = http.createServer((req, res) => {
-    let filePath = path.join(__dirname, req.url === '/' ? 'dashboard.html' : req.url);
+    // Serve files from src/web directory
+    let filePath = req.url === '/'
+      ? path.join(CONFIG.webDir, 'dashboard.html')
+      : path.join(CONFIG.webDir, req.url);
 
     const ext = path.extname(filePath);
     const contentType = {
