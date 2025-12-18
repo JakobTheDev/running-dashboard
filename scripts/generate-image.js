@@ -8,9 +8,9 @@ const CONFIG = {
   // E-ink display dimensions - adjust for your specific display
   width: 800,
   height: 480,
-  webDir: path.join(__dirname, 'src', 'web'),
-  outputPath: path.join(__dirname, 'dashboard.png'),
-  htmlPath: path.join(__dirname, 'src', 'web', 'dashboard.html'),
+  webDir: path.join(__dirname, '..', 'web'),
+  outputPath: path.join(__dirname, '..', 'output', 'dashboard.png'),
+  htmlPath: path.join(__dirname, '..', 'web', 'dashboard.html'),
   port: 8765
 };
 

@@ -4,7 +4,8 @@
   "description": "E-ink running dashboard with Strava and Google Calendar data",
   "main": "generate.js",
   "scripts": {
-    "generate": "node generate.js",
+    "generate": "node scripts/generate-image.js",
+    "display": "node scripts/display-image.py",
     "serve": "npx http-server -p 8080"
   },
   "keywords": [
